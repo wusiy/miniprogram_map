@@ -10,4 +10,17 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+
+
+  <button open-type='openSetting'>打开设置页</button>
+
+  <view class="btnbox" hover-class="btnbox_hover"  hover-stay-time="200">
+    
+    <button class="btn" bindtap="btnClick_dt"></button>
+    <view class="text">进入地图页面</view>
+  </view>
+
+
+  
+
 </view>

@@ -1,66 +1,79 @@
-// pages/map/map.js
+// pages/maps/map.js
+
+const app = getApp();
+ 
+// // 引入SDK核心类
+// var QQMapWX = require('../../libs/qqmap-wx-jssdk');
+ 
+// // 实例化API核心类
+// var qqmapsdk = new QQMapWX({
+//   key: '74YBZ-OBEWF-Y7EJQ-N3MTN-HHVLS-ASFTO' // 必填
+// });
+
 Page({
+	data: {
+		longitude: '',
+		latitude: '',
+	},
+	onLoad() {
+		this.Location()
+	},
+	regionchange(e) {
+		// 地图发生变化的时候，获取中间点，也就是用户选择的位置toFixed
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+		if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
+			var that = this;
 
-  },
+			this.mapCtx = wx.createMapContext("map4select");
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+			this.mapCtx.getCenterLocation({
 
-  },
+				type: 'gcj02',
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+				success: function(res) {
 
-  },
+					console.log(res, 11111)   //移动后，新位置的经纬度
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+					that.setData({
 
-  },
+						latitude: res.latitude,
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+						longitude: res.longitude,
 
-  },
+						circles: [{
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+							latitude: res.latitude,
 
-  },
+							longitude: res.longitude,
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+							color: '#FF0000DD',
 
-  },
+							fillColor: '#d1edff88',
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+							radius: 3000, //定位点半径
 
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+							strokeWidth: 1
+						}]
+					})
+				}
+			})
+		}
+	},
+	//定位到自己的位置事件
+	my_location: function(e) {
+		var that = this;
+		that.onLoad();
+	},
+	Location: function() {
+			var that = this;
+		wx.getLocation({
+			type: "gcj02",
+			success: function(res) {
+				that.setData({
+					latitude: res.latitude,
+					longitude: res.longitude
+				})
+			}
+		})
+	}
 })

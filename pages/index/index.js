@@ -9,6 +9,18 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+
+  btnClick_dt:function(){
+    wx.authorize({
+      scope: 'scope.userLocation'
+    });
+
+    wx.navigateTo({
+      url: '../map/map'
+    })
+
+  },
+
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({

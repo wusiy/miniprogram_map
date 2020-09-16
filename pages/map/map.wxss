@@ -1,1 +1,47 @@
 /* pages/map/map.wxss */
+
+.container{
+	width: 100%;
+	margin: 0 auto ;
+	padding: 0;
+}
+.current_location{
+	width: 50rpx;
+	height: 50rpx;
+	position: absolute;
+	right: 30rpx;
+	top: 30rpx;
+	z-index: 200;
+}
+.cover-image {
+
+	position: absolute;
+
+	top: 50%;
+
+	left: 50%;
+
+	margin-top: -25rpx;
+
+	margin-left: -25rpx;
+
+	width: 54.3rpx;
+	height: 49.3rpx;
+
+}
+
+.cover-image_confirm {
+
+	width: 50rpx;
+
+	height: 50rpx;
+
+}
+
+.map {
+
+	width: 750rpx;
+
+	height: 1200rpx;
+
+}
