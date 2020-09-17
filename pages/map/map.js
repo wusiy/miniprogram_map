@@ -19,19 +19,10 @@ Page({
     qqmapsdk.reverseGeocoder({
       //位置坐标，默认获取当前位置，非必须参数
       /**
-       * 
-       //Object格式
-        location: {
-          latitude: 39.984060,
-          longitude: 116.307520
-        },
-      */
-      /**
        *
        //String格式
         location: '39.984060,116.307520',
       */
-      
       location: e.detail.value.reverseGeo || loc, //获取表单传入的位置坐标,不填默认当前位置,示例为string格式
       //get_poi: 1, //是否返回周边POI列表：1.返回；0不返回(默认),非必须参数
         get_poi: 1,
@@ -43,13 +34,13 @@ Page({
         
         //当get_poi为0时或者为不填默认值时，检索目标位置，按需使用
           mks.push({ // 获取返回结果，放到mks数组中
-            title: res.address + "\r"+ res.formatted_addresses.recommend,
+           title: res.address + "\r"+ res.formatted_addresses.recommend,
            id: 0,
            latitude: res.location.lat,
            longitude: res.location.lng,
-            iconPath: '../../utils/res/mark.png',//图标路径
+           iconPath: '../../utils/res/mark.png',//图标路径
            width: 20,
-            height: 20,
+           height: 20,
            callout: { //在markers上展示地址名称，根据需求是否需要
               content: res.address + "\n\r"+ res.formatted_addresses.recommend,
               color: '#000',
@@ -59,16 +50,14 @@ Page({
         
            //当get_poi为1时，检索当前位置或者location周边poi数据并在地图显示，可根据需求是否使用
           for (var i = 0; i < res.poi_count; i++) {
-             
             mks.push({ // 获取返回结果，放到mks数组中
                 title: res.pois[i].address + "\r" + res.pois[i].title,
                 id: res.pois[i].id,
                 latitude: res.pois[i].location.lat,
                 longitude: res.pois[i].location.lng,
-                iconPath: './resources/placeholder.png', //图标路径
+                iconPath: '../../utils/res/mark2.png', //图标路径
                 width: 20,
                 height: 20
-                
             })
             }
 
@@ -113,11 +102,33 @@ Page({
 
 	data: {
 		longitude: '',
-		latitude: '',
+    latitude: '',
+    markers: []
 	},
 	onLoad() {
 		this.Location()
-	},
+  },
+  
+ // 点击标点获取数据 (模拟点选用户)
+ markertap(e) {
+  var id = e.markerId
+  var p;
+  for(var i = 0; i < this.data.markers.length; i++){
+    if(id == this.data.markers[i].id){
+      p = i;
+      break;
+    }
+  }
+  var name = this.data.markers[p].title
+  console.log(name)
+
+  wx.showToast({
+    title: '(此为模拟点选用户标点)  已成功点选:  ' + name,
+    icon: 'none',
+    duration: 3000
+  })
+},
+
 	regionchange(e) {
 		// 地图发生变化的时候，获取中间点，也就是用户选择的位置toFixed
 
