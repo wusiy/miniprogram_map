@@ -3,6 +3,7 @@
 const app = getApp()
 
 Page({
+  
   data: {
     motto: 'Hello World',
     userInfo: {},
@@ -10,10 +11,29 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
+  close: function () {
+    this.setData({
+        showActionsheet: false
+    })
+},
+btnClick(e) {
+    console.log(e)
+    this.close()
+},
+
   btnClick_dt:function(){
-    wx.authorize({
-      scope: 'scope.userLocation'
-    });
+    // wx.authorize({
+    //   scope: 'scope.userLocation'
+    // });
+
+    // wx.showActionSheet({
+    //   itemList: ['A', 'B', 'A', 'B22',"fff",'dddddd'],
+    //   success: function (res) {
+    //     if (!res.cancel) {
+    //       console.log(res.tapIndex)
+    //     }
+    //   }
+    // });
 
     wx.navigateTo({
       url: '../map/map'

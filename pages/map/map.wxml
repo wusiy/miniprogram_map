@@ -10,7 +10,7 @@
 </view>
 
 
-<scroll-view scroll-y="true" style="height: 800rpx;">
+<scroll-view scroll-y="true" style="height: 1800rpx;">
   <view class="scroll-y" >
 
    <!--form表单-->
@@ -21,10 +21,13 @@
     <button form-type="submit">逆地址解析</button>
 		</form>
 
-		<view>当前位置为：{{markers[0].title}}</view><!--form表单-->
-		<view>{{location}}</view>
+		<view>
+			<text>当前位置为:  {{latitude}}  ,  {{longitude}} \n{{markers[0].title}} \n\n
+						周边位置为：\n {{markers[1].title}} \n {{markers[2].title}} \n {{markers[3].title}} \n {{markers[4].title}} 
+						\n {{markers[5].title}} \n {{markers[6].title}} \n {{markers[7].title}} \n {{markers[8].title}} \n {{markers[9].title}}
+			</text> 
+		</view><!--form表单-->
 
-	
     
   </view>
 </scroll-view>
